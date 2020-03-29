@@ -1,6 +1,6 @@
 import { ButtonDemoComponentComponent } from '../app/button-demo-component/button-demo-component.component';
 import { centered } from '@storybook/addon-centered/angular';
-import {select, withKnobs } from '@storybook/addon-knobs';
+import {select, text, withKnobs } from '@storybook/addon-knobs';
 import {moduleMetadata} from '@storybook/angular';
 
 const label = 'type';
@@ -12,8 +12,6 @@ const options = {
   Negative: 'negative',
 };
 const defaultValue = 'default';
-
-const value = select(label, options, defaultValue);
 
 export default {
   title: 'Button',
@@ -30,7 +28,7 @@ export default {
 export const Default = () => ({
   component: ButtonDemoComponentComponent,
   template: `
-  <app-button-demo-component [type]="'default'">Default
+  <app-button-demo-component [type]="'default'" [text]="'default'">Default
   </app-button-demo-component>
   `
 });
@@ -41,7 +39,7 @@ Default.story = {
 export const Error = () => ({
   component: ButtonDemoComponentComponent,
   template: `
-  <app-button-demo-component [type]="'error'">Error
+  <app-button-demo-component [type]="'error'" [text]="'error'">Error
   </app-button-demo-component>
   `
 });
@@ -52,7 +50,7 @@ Error.story = {
 export const Warning = () => ({
   component: ButtonDemoComponentComponent,
   template: `
-  <app-button-demo-component [type]="'warning'">Warning
+  <app-button-demo-component [type]="'warning'" [text]="'warning'">Warning
   </app-button-demo-component>
   `
 });
@@ -63,7 +61,7 @@ Warning.story = {
 export const Positive = () => ({
   component: ButtonDemoComponentComponent,
   template: `
-  <app-button-demo-component [type]="'positive'">Positive
+  <app-button-demo-component [type]="'positive'" [text]="'positive'">Positive
   </app-button-demo-component>
   `
 });
@@ -74,7 +72,7 @@ Positive.story = {
 export const Negative = () => ({
   component: ButtonDemoComponentComponent,
   template: `
-  <app-button-demo-component [type]="'negative'">Negative
+  <app-button-demo-component [type]="'negative'" [text]="'negative'">Negative
   </app-button-demo-component>
   `
 });
@@ -86,10 +84,11 @@ Negative.story = {
 export const DefaultWithKnobs = () => ({
   component: ButtonDemoComponentComponent,
   props: {
-    type : value
+    knobsOptionType : select(label, options, defaultValue),
+    knobsText: text('button text', 'custom text'),
   },
   template: `
-  <app-button-demo-component [type]="'default'">Knobs
+  <app-button-demo-component [type]="knobsOptionType" [text]="knobsText">Knobs
   </app-button-demo-component>
   `
 });
