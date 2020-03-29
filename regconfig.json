@@ -1,0 +1,23 @@
+{
+  "core": {
+    "workingDir": ".reg",
+    "actualDir": "__screenshots__",
+    "thresholdRate": 0,
+    "addIgnore": true,
+    "ximgdiff": {
+      "invocationType": "client"
+    }
+  },
+  "plugins": {
+    "reg-keygen-git-hash-plugin": true,
+    "reg-notify-github-plugin": {
+      "clientId": "MzI1sLQ0NDY21M9LLa3QNTA2NtAtLskvqkzKz8/WTUnNzdc3NzY3tDC00A/KT6m0NDQDAA=="
+    },
+    "reg-notify-slack-plugin": {
+      "webhookUrl": "https://hooks.slack.com/services/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"
+    },
+    "reg-publish-gcs-plugin": {
+      "bucketName": "neux-storybook-demo-0330"
+    }
+  }
+}

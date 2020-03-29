@@ -1,0 +1,15 @@
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-button-demo-component',
+  templateUrl: './button-demo-component.component.html',
+  styleUrls: ['./button-demo-component.component.scss']
+})
+export class ButtonDemoComponentComponent implements OnInit {
+  constructor() { }
+  @Input() type: string;
+
+  ngOnInit(): void {
+  }
+
+}
