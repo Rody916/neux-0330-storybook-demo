@@ -1,7 +1,7 @@
 import { ButtonDemoComponentComponent } from '../app/button-demo-component/button-demo-component.component';
 import { centered } from '@storybook/addon-centered/angular';
 import {select, text, withKnobs } from '@storybook/addon-knobs';
-import {moduleMetadata} from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
 
 const label = 'type';
 const options = {
@@ -86,6 +86,7 @@ export const DefaultWithKnobs = () => ({
   props: {
     knobsOptionType : select(label, options, defaultValue),
     knobsText: text('button text', 'custom text'),
+    callActions: action('This was clicked OMG'),
   },
   template: `
   <app-button-demo-component [type]="knobsOptionType" [text]="knobsText">Knobs
