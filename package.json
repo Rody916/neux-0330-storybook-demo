@@ -10,6 +10,7 @@
     "e2e": "ng e2e",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages",
     "regression": "reg-suit run",
     "storycap": "npx storycap http://localhost:6006"
   },
@@ -24,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~9.0.5",
     "@angular/router": "~9.0.5",
     "@storybook/addon-docs": "^5.3.17",
+    "@storybook/storybook-deployer": "^2.8.3",
     "rxjs": "~6.5.4",
     "storycap": "^2.3.5",
     "tslib": "^1.10.0",
@@ -41,6 +43,7 @@
     "@storybook/addon-knobs": "^5.3.17",
     "@storybook/addon-links": "^5.3.17",
     "@storybook/addon-notes": "^5.3.17",
+    "@storybook/addon-storysource": "^5.3.17",
     "@storybook/addon-viewport": "^5.3.17",
     "@storybook/addons": "^5.3.17",
     "@storybook/angular": "^5.3.17",
