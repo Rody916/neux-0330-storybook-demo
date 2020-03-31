@@ -30,7 +30,16 @@ export const Default = () => ({
   template: `
   <app-button-demo-component [type]="'default'" [text]="'default'">Default
   </app-button-demo-component>
-  `
+  `,
+  parameters: {
+    screenshot: {
+      variants: {
+        small: {
+          viewport: 'iPhone X',
+        },
+      },
+    },
+  }
 });
 Default.story = {
   name: 'default',
