@@ -11,15 +11,12 @@ jobs:
         default: neux_circleci
         description: |
           Executor to use for this job. Defaults to this orb's default executor.
-        type: executor
       gcloud-service-key:
         default: 01a67ada57f20374bbd49f8eceb6e2d51ac07c91
         description: The gcloud service key
-        type: env_var_name
       google-project-id:
         default: screenshot-demo-0317-project
         description: The Google project ID to connect with via the gcloud CLI
-        type: env_var_name
     steps:
       - install
       - initialize:
