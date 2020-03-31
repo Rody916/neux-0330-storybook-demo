@@ -7,11 +7,21 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test
-workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn install --pure-lockfile
+
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies--{{ checksum "yarn.lock" }}
+
+        - run: yarn screenshot
+        - run: yarn regression
