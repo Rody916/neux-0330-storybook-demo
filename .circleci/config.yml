@@ -24,8 +24,13 @@ jobs:
             - ./node_modules
 
       - run:
+          name: run storybook
+          command: npm run storybook
+          background: true
+
+      - run:
           name: take shots
-          command: npm run storybook && npm run storycap
+          command: npx storycap
 
       - run:
           name: run regreesion
