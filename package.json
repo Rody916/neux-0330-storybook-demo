@@ -12,7 +12,7 @@
     "build-storybook": "build-storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "regression": "reg-suit run",
-    "storycap": "npx storycap http://localhost:6006"
+    "storycap": "npx storycap http://localhost:6006  --serverTimeout 50000"
   },
   "private": true,
   "dependencies": {
