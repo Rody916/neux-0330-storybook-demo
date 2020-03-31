@@ -17,7 +17,7 @@
       "webhookUrl": "https://hooks.slack.com/services/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"
     },
     "reg-publish-gcs-plugin": {
-      "bucketName": "neux-storybook-demo-0330"
+      "bucketName": "neux-demo"
     }
   }
 }

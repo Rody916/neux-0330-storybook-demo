@@ -1,16 +1,54 @@
-# orbs:
-#   gcp-cli: circleci/gcp-cli@1.8.4
 version: 2.1
+orbs:
+  gcp-cli: circleci/gcp-cli@1.8.2
 jobs:
   build:
     docker:
       - image: circleci/node:10.16.3-browsers
+    description: 'Install the gcloud CLI, if not available'
+    parameters:
+      version:
+        default: 283.0.0
+        description: >-
+          Version of the CLI to install. Must contain the full version number as it
+          appears in the URL on this page:
+          https://cloud.google.com/sdk/docs/downloads-versioned-archives
+        type: string
     steps:
-      - run: echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-      - run: sudo apt-get install apt-transport-https ca-certificates gnupg
-      - run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-      - run: sudo apt-get update && sudo apt-get install google-cloud-sdk
-      - run: gcloud init
+      - run:
+          command: |
+            install () {
+              # Set sudo to work whether logged in as root user or non-root user
+              if [[ $EUID == 0 ]]; then export SUDO=""; else export SUDO="sudo"; fi
+              cd ~/
+              curl -s https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-<<parameters.version>>-linux-x86_64.tar.gz | tar xz
+              echo 'source ~/google-cloud-sdk/path.bash.inc' >> $BASH_ENV
+            }
 
+            if grep 'docker\|lxc' /proc/1/cgroup > /dev/null 2>&1; then
+              if [[ $(command -v gcloud) == "" ]]; then
+                install
+              else
+                echo "gcloud CLI is already installed."
+              fi
+            else
+              echo "----------------------------------------------------------------------------------------------------"
+              echo "this is a machine executor job, replacing default installation of gcloud CLI"
+              echo "----------------------------------------------------------------------------------------------------"
+              sudo rm -rf /opt/google-cloud-sdk
+              install
+            fi
+          name: 'Install latest gcloud CLI version, if not available'
+      - run:
+          command: gcloud version
+          name: GCloud version
 
+      # - run:
+      #     command: npm run storybook
+      #     background: true
 
+      # - run:
+      #     command: npm run storycap
+
+      - run:
+          command: npm regression
