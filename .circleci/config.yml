@@ -19,11 +19,11 @@ commands:
     - run:
         command: |
           # Store service account
-          echo $<<parameters.gcloud_service_key>> > gcloud_service_key.json
+          echo $gcloud_service_key > gcloud_service_key.json
 
           # Initialize gcloud CLI
           gcloud auth activate-service-account --key-file=gcloud_service_key.json
-          gcloud --quiet config set project $<<parameters.google_project_id>>
+          gcloud --quiet config set project $google_project_id
         name: Initialize gcloud CLI to connect to Google Cloud
 
   install:
