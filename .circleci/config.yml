@@ -87,11 +87,7 @@ jobs:
           description: The Google project ID to connect with via the gcloud CLI
           type: env_var_name
       steps:
-      - install
-      - initialize:
-          gcloud_service_key: <<parameters.gcloud_service_key>>
-          google_project_id: <<parameters.google_project_id>>
-      # - checkout
+      - checkout
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
@@ -102,6 +98,11 @@ jobs:
       - run:
           name: install-npm-wee
           command: npm install
+
+      - install
+      - initialize:
+          gcloud_service_key: <<parameters.gcloud_service_key>>
+          google_project_id: <<parameters.google_project_id>>
 
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
