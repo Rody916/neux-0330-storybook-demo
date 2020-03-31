@@ -86,10 +86,6 @@ jobs:
           type: env_var_name
       steps:
       - checkout
-      # - run:
-      #     command: |
-      #       git config --global user.email $GH_EMAIL
-      #       git config --global user.name $GH_NA
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
@@ -111,11 +107,11 @@ jobs:
           paths:
             - ./node_modules
       - run:
-        command: npm run storybook
-        background: true
+          name: Run storybook in background
+          command: npm run storybook
+          background: true
 
       - run: npm run storycap
-
       - run: npm run regression
 
 
