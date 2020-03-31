@@ -25,7 +25,7 @@ jobs:
 
       - run:
           name: take shots
-          command: npx storycap --serverCmd "start-storybook -p 3000" http://localshot:3000
+          command: npm run storybook && npm run storycap
 
       - run:
           name: run regreesion
