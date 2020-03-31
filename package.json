@@ -12,7 +12,7 @@
     "build-storybook": "build-storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "regression": "reg-suit run",
-    "storycap": "npx storycap http://localhost:6006  --serverTimeout 50000 -V 1024x768 -V 'iPhone X'"
+    "storycap": "npx storycap http://localhost:6006  --delay 2000 --serverTimeout 50000 -V 1024x768 -V 'iPhone X'"
   },
   "private": true,
   "dependencies": {
