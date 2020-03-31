@@ -7,21 +7,28 @@ jobs:
       name: node/default
     steps:
       - checkout
-
+      - run:
+        name: update-npm
+        command: 'sudo npm install -g npm@latest'
       # Download and cache dependencies
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          key: dependency-cache-{{ checksum "package-lock.json" }}
 
-      - run: yarn install --pure-lockfile
-
+      - run:
+          name: install-npm-wee
+          command: npm install
 
       - save_cache:
+           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
-            - node_modules
-          key: v1-dependencies--{{ checksum "yarn.lock" }}
+            - ./node_modules
 
-      - run: yarn screenshot
-      - run: yarn regression
+      - run:
+          name: take shots
+          command: npm run screenshot
+
+      - run:
+          name: run regreesion
+          command: npm run regression
+
+
