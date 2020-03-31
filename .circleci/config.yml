@@ -1,79 +1,16 @@
-orbs:
-  gcp-cli: circleci/gcp-cli@1.8.4
+# orbs:
+#   gcp-cli: circleci/gcp-cli@1.8.4
 version: 2.1
 jobs:
-  # install_gcloud_CLI:
-  #   description: |
-  #     Install gcloud CLI and initialize to connect to Google Cloud
-  #   executor: <<parameters.executor>>
-  #   parameters:
-  #     executor:
-  #       default: default
-  #       description: |
-  #         Executor to use for this job. Defaults to this orb's default executor.
-  #       type: executor
-  #     gcloud-service-key:
-  #       default: GCLOUD_SERVICE_KEY
-  #       description: The gcloud service key
-  #       type: env_var_name
-  #     # google-compute-zone:
-  #     #   default: GOOGLE_COMPUTE_ZONE
-  #     #   description: The Google compute zone to connect with via the gcloud CLI
-  #     #   type: env_var_name
-  #     google-project-id:
-  #       default: GOOGLE_PROJECT_ID
-  #       description: The Google project ID to connect with via the gcloud CLI
-  #       type: env_var_name
-  #   steps:
-  #     - install
-  #     - initialize:
-  #         gcloud-service-key: <<parameters.gcloud_service_key>>
-  #         # google-compute-zone: <<parameters.google-compute-zone>>
-  #         google-project-id: <<parameters.google_project_id>>
-  # build:
+  build:
     docker:
       - image: circleci/node:10.16.3-browsers
     steps:
-      - checkout
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
-      # Download and cache dependencies
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-
-      - run:
-          name: install-npm-wee
-          command: npm install
-
-      - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
-
-      # - run:
-      #     name: run storybook
-      #     command: npm run storybook
-      #     background: true
-
-      # - run:
-      #     name: take shots
-      #     command: npm run storycap
-
-      # - run:
-      #     name: run regreesion
-      #     command: npm run regression
-
-
-      - run:
-          name: gcloud
-          command: gcloud auth list
-  test:
-    - run: echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-    - run: sudo apt-get install apt-transport-https ca-certificates gnupg
-    - run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-    - run: sudo apt-get update && sudo apt-get install google-cloud-sdk
-    - run: gcloud init
+      - run: echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+      - run: sudo apt-get install apt-transport-https ca-certificates gnupg
+      - run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+      - run: sudo apt-get update && sudo apt-get install google-cloud-sdk
+      - run: gcloud init
 
 
 
