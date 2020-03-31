@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: take shots
-          command: npx storycap
+          command: npm run storycap
 
       - run:
           name: run regreesion
