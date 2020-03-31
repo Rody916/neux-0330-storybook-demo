@@ -60,8 +60,13 @@ jobs:
       #     name: take shots
       #     command: npm run storycap
 
+      # - run:
+      #     name: run regreesion
+      #     command: npm run regression
+
+
       - run:
-          name: run regreesion
-          command: npm run regression
+          name: gcloud
+          command: gcloud auth list
 
 
