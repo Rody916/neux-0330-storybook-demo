@@ -68,5 +68,12 @@ jobs:
       - run:
           name: gcloud
           command: gcloud auth list
+  test:
+    - run: echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+    - run: sudo apt-get install apt-transport-https ca-certificates gnupg
+    - run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+    - run: sudo apt-get update && sudo apt-get install google-cloud-sdk
+    - run: gcloud init
+
 
 
