@@ -24,6 +24,10 @@ jobs:
             - ./node_modules
 
       - run:
+          name: run storybook
+          command: npm run storybook
+
+      - run:
           name: take shots
           command: npm run storycap
 
