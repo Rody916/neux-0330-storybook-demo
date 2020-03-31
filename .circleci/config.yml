@@ -20,7 +20,7 @@ commands:
         command: |
           # Store service account
           echo $gcloud_service_key > gcloud_service_key.json
-
+          cat gcloud_service_key.json
           # Initialize gcloud CLI
           gcloud auth activate-service-account --key-file=gcloud_service_key.json
           gcloud --quiet config set project $google_project_id
@@ -87,4 +87,20 @@ jobs:
       - initialize:
           gcloud_service_key: <<parameters.gcloud_service_key>>
           google_project_id: <<parameters.google_project_id>>
+
+      - checkout # special step to check out source code to working directory
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache: # special step to restore the dependency cache
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
       - run: npm run regression
+
