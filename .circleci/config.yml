@@ -70,8 +70,6 @@ orbs:
   gcp-cli: circleci/gcp-cli@1.8.4
   orb-tools: circleci/orb-tools@8.26.0
 jobs:
-    set-gcloudCLI:
-
     build:
       docker:
         - image: circleci/node:10.16.3-browsers
@@ -88,6 +86,10 @@ jobs:
           type: env_var_name
       steps:
       - checkout
+      # - run:
+      #     command: |
+      #       git config --global user.email $GH_EMAIL
+      #       git config --global user.name $GH_NA
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
@@ -108,6 +110,11 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
+      - run:
+        command: npm run storybook
+        background: true
+
+      - run: npm run storycap
 
       - run: npm run regression
 
