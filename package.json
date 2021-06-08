@@ -61,7 +61,7 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "~5.4.3",
-    "reg-keygen-git-hash-plugin": "^0.8.5",
+    "reg-keygen-git-hash-plugin": "^0.10.16",
     "reg-notify-github-plugin": "^0.8.5",
     "reg-notify-slack-plugin": "^0.8.4",
     "reg-publish-gcs-plugin": "^0.9.0",
